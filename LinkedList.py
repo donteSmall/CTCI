@@ -39,14 +39,14 @@ class linkedList(object):
             self.add_multiple(head)
 
 
-    def insert_a_new_node_into_the_list(self, data):
+    def insert_at_beginning(self, data):
         new_node = Node(data)
         new_node.set_pointer_to_next_node(self.head)
         self.head = new_node
 
     def add_multiple(self, value):
         if v in values:
-            self.insert_a_new_node_into_the_list(value)
+            self.insert_at_beginning(value)
 
     def __repr__(self):
         return str(self.head)
@@ -204,17 +204,18 @@ class Stack(object):
 
 def main():
     l = linkedList()
-    l.insert_a_new_node_into_the_list("a")
-    l.insert_a_new_node_into_the_list("a")
-    l.insert_a_new_node_into_the_list("b")
-    l.insert_a_new_node_into_the_list("c")
-    l.insert_a_new_node_into_the_list("c")
-    l.insert_a_new_node_into_the_list("c")
-    l.insert_a_new_node_into_the_list("d")
-    l.insert_a_new_node_into_the_list("e")
-    l.insert_a_new_node_into_the_list("e")
+    l.insert_at_beginning("a")
+    l.insert_at_beginning("a")
+    l.insert_at_beginning("b")
+    l.insert_at_beginning("c")
+    l.insert_at_beginning("c")
+    l.insert_at_beginning("c")
+    l.insert_at_beginning("d")
+    l.insert_at_beginning("e")
+    l.insert_at_beginning("e")
     l.search('d')
     l.print_list()
 
     l.remove_duplicates()
     l.print_list()
+main()

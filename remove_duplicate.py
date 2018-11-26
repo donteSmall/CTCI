@@ -79,13 +79,13 @@ class Test(unittest.TestCase):
         self.assertEqual(None, kth_to_last(head, 8))
 
     def test_partition(self):
-        self.list.insert_a_new_node_into_the_list(7)
-        self.list.insert_a_new_node_into_the_list(2)
-        self.list.insert_a_new_node_into_the_list(9)
-        self.list.insert_a_new_node_into_the_list(1)
-        self.list.insert_a_new_node_into_the_list(6)
-        self.list.insert_a_new_node_into_the_list(3)
-        self.list.insert_a_new_node_into_the_list(8)
+        self.list.insert_at_beginning(7)
+        self.list.insert_at_beginning(2)
+        self.list.insert_at_beginning(9)
+        self.list.insert_at_beginning(1)
+        self.list.insert_at_beginning(6)
+        self.list.insert_at_beginning(3)
+        self.list.insert_at_beginning(8)
         header= self.list
         head2 = header.partition(6)
 
