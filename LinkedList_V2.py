@@ -52,7 +52,7 @@ class linkedList(object):
 
 
     def __str__(self):
-        return ' -> '.join([str(x) for x in self])
+        return ','.join([str(x) for x in self])
 
     def __len__(self):
         result = 0
@@ -71,8 +71,6 @@ class linkedList(object):
 
         return self.tail
 
-
-
     def add_multiple(self, data):
 
         for value in data:
@@ -81,6 +79,8 @@ class linkedList(object):
 
     def __repr__(self):
         return str(self.head)
+
+
 
     def add_to_beginning(self,value):
 
@@ -203,21 +203,22 @@ class linkedList(object):
         if self.tail.next is not None:
             self.tail.next = None
         return self.head
-
+    def isinstance(self):
+        return (self.head, other.head)
     def sum_lists(self,llist1):
-        p = self.head
-        q = llist1.head
+        primary_list = self.head
+        secondary_list = llist1.head
         sum_list = linkedList()
         carry = 0
-        while p or q:
-            if not p:
+        while primary_list or secondary_list :
+            if not primary_list:
                 i = 0
             else:
-                i = p.data
-            if not q:
+                i = primary_list.data
+            if not secondary_list :
                 j = 0
             else:
-                j = q.data
+                j = secondary_list .data
             s = i + j + carry
             if s >= 10:
                 carry = 1
@@ -226,11 +227,12 @@ class linkedList(object):
             else:
                 carry = 0
                 sum_list.add(s)
-            if p:
-                p = p.next
-            if q:
-                q = q.next
-        return sum_list
+            if primary_list:
+                primary_list = primary_list.next
+            if secondary_list :
+                secondary_list  = secondary_list .next
+
+        return sum_list.head
 
 
 
@@ -296,4 +298,4 @@ class DoublyLinkedList(linkedList):
 #     l.search('d')
 #     l.print_list()
 #     l.remove_duplicates()
-#     l.print_list()
+#     l.primary_listrint_list()

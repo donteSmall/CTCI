@@ -114,7 +114,6 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(str(head2), '3,1,2,10,5,5,8')
 
     def test_sum_lists(self):
-        #type issue here needs to be fixed,incorrect test
         self.list.add(5)
         self.list.add(6)
         self.list.add(3)
@@ -122,7 +121,8 @@ class linked_List_Tests(unittest.TestCase):
         self.list2.add(8)
         self.list2.add(4)
         self.list2.add(2)
-        self.assertTrue(self.list.sum_lists(self.list2), '3,1,6')
+        result = self.list.sum_lists(self.list2)
+        self.assertEqual(str(result) , '3,1,6')
 
 
 
