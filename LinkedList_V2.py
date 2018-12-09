@@ -6,8 +6,9 @@ class Node(object):
         self.next = next
         self.prev = prev
 
-    def __str__(self):
-        return str(self.data)
+    # def __str__(self):
+    #
+    #     return str(self.data)
 
     def get_data(self):
         return self.data
@@ -26,13 +27,11 @@ class Node(object):
     def __repr__(self):
         return "--> " + str(self.data)
 
-    # def to_string(self):
-    #     return "-->" + str(self.data)
-
-
-
-    def print_list():
-        pass
+    def __str__(self):
+        string = str(self.data)
+        if self.next:
+          string += ',' + str(self.next)
+        return string
 
 
 class linkedList(object):
@@ -137,6 +136,10 @@ class linkedList(object):
             previous.set_pointer_to_next(current_item_in_list.get_next())
 
 
+    def delete_middle(node):
+        next = node.next
+        node.data = node.data
+        node.next = next.next
 
     def remove_duplicates(self):
             current_item_in_list = self.head
@@ -153,6 +156,85 @@ class linkedList(object):
 
                 current_item_in_list = current_item_in_list.get_next()
 
+    def remove_duplicates_2(self,head):
+        node= head
+
+        if node:
+            values = {node.data: True}
+            while node.next:
+                if node.next.data in values:
+                    node.next = node.next.next
+                else:
+                    values[node.next.data] = True
+                    node = node.next
+        return head
+
+    def delete_middle(self,node):
+        next = node.next
+        node.data = node.data
+        node.next = next.next
+
+    def kth_to_last(self,head, k):
+        lead,follow = head, head
+        for _ in xrange(k):
+            if not lead:
+                return None
+            lead = lead.next
+
+        while lead:
+            lead,follow = lead.next, follow.next
+
+        return follow
+
+    def partition(self,x):
+        current = self.tail = self.head
+
+        while current:
+            next_node = current.next
+            current.next = None
+            if current.data < x:
+                current.next = self.head
+                self.head = current
+            else:
+                self.tail.next = current
+                self.tail = current
+            current = next_node
+
+        if self.tail.next is not None:
+            self.tail.next = None
+        return self.head
+
+    def sum_lists(self,llist1):
+        p = self.head
+        q = llist1.head
+        sum_list = linkedList()
+        carry = 0
+        while p or q:
+            if not p:
+                i = 0
+            else:
+                i = p.data
+            if not q:
+                j = 0
+            else:
+                j = q.data
+            s = i + j + carry
+            if s >= 10:
+                carry = 1
+                remainder = s % 10
+                sum_list.add(remainder)
+            else:
+                carry = 0
+                sum_list.add(s)
+            if p:
+                p = p.next
+            if q:
+                q = q.next
+        return sum_list
+
+
+
+
     def print_list(self):
         print("Print List.................")
         if self.head is None:
@@ -163,6 +245,7 @@ class linkedList(object):
         while this_node.has_next():
             this_node = this_node.get_next()
             print(this_node.to_string())
+
 
 #Prints out the values in a LinkedList
 
@@ -186,17 +269,6 @@ class Stack(object):
             self.head = self.head.next
             return popped
 
-#Prints out the values in a LinkedList
-    def print_list(self):
-        print("Print List.................")
-        if self.head is None:
-            return
-        this_node = self.head
-        print(this_node.to_string())
-
-        while this_node.has_next():
-            this_node = this_node.get_next()
-            print(this_node.to_string())
 #Original list
 # a-> a->b-> c -> d -> e -> e
 #Expected list
@@ -212,18 +284,16 @@ class DoublyLinkedList(linkedList):
 
 # def main():
 #     l = linkedList()
-#     l.insert_at_beginning("a")
-#     l.insert_at_beginning("a")
-#     l.insert_at_beginning("b")
-#     l.insert_at_beginning("c")
-#     l.insert_at_beginning("c")
-#     l.insert_at_beginning("c")
-#     l.insert_at_beginning("d")
-#     l.insert_at_beginning("e")
-#     l.insert_at_beginning("e")
+#     l.add_to_beginning("a")
+#     l.add_to_beginning("a")
+#     l.add_to_beginning("b")
+#     l.add_to_beginning("c")
+#     l.add_to_beginning("c")
+#     l.add_to_beginning("c")
+#     l.add_to_beginning("d")
+#     l.add_to_beginning("e")
+#     l.add_to_beginning("e")
 #     l.search('d')
 #     l.print_list()
-#
 #     l.remove_duplicates()
 #     l.print_list()
-# main()

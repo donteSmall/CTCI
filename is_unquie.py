@@ -195,10 +195,6 @@ def is_substring(s1,s2):
 def string_rotation(s1,s2):
     return is_substring(s2,s1+s1)
 
-
-
-
-
 class string_Test(unittest.TestCase):
 #O(N)
     test_1 = [('abcd'), ('s4fad'),('')]
