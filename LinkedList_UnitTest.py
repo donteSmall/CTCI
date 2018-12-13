@@ -122,7 +122,51 @@ class linked_List_Tests(unittest.TestCase):
         self.list2.add(4)
         self.list2.add(2)
         result = self.list.sum_lists(self.list2)
-        self.assertEqual(str(result) , '3,1,6')
+        self.assertEqual(str(result) ,'3,1,6')
+
+
+    def test_if_palindrome(self):
+        self.list.add("R")
+        self.list.add("A")
+        self.list.add("D")
+        self.list.add("A")
+        self.list.add("R")
+        self.assertEqual(self.list.panlidrome(),True)
+
+        self.list2.add("T")
+        self.list2.add("E")
+        self.list2.add("S")
+        self.list2.add("T")
+        self.assertEqual(self.list2.panlidrome(),False )
+
+    def test_intersection(self):
+        self.list.add("1")
+        self.list.add("3")
+        self.list.add("5")
+        self.list.add("7")
+        self.list.add("9")
+        self.list.add("11")
+
+
+        self.list2.add("2")
+        self.list2.add("4")
+        self.list2.add("9")
+        self.list2.add("11")
+
+        result= self.list.intersection(self.list,self.list2)
+        self.assertEqual(result,'9')
+
+    def test_loop_detection(self):
+        self.list.add("A")
+        self.list.add("B")
+        self.list.add("C")
+        self.list.add("D")
+        self.list.add("E")
+        self.list.add("C")
+
+
+        # result = self.list.loop_Detection()
+        # self.assertEqual(result, "C")
 
 
 

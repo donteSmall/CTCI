@@ -203,8 +203,7 @@ class linkedList(object):
         if self.tail.next is not None:
             self.tail.next = None
         return self.head
-    def isinstance(self):
-        return (self.head, other.head)
+
     def sum_lists(self,llist1):
         primary_list = self.head
         secondary_list = llist1.head
@@ -233,6 +232,69 @@ class linkedList(object):
                 secondary_list  = secondary_list .next
 
         return sum_list.head
+
+    def panlidrome(self):
+        aString = ""
+        start = self.head
+        while start:
+            aString += start.data
+            start= start.next
+        return aString == aString[:: -1]
+
+    def intersection(self,list1, list2):
+    # a: 1-> 3-> 5->7->9->11->None
+    # b: 2-> 4->9->7->11-> None
+
+    # ab: 1-> 3-> 5->7->9->11->2->4->9->11->None
+    # ba: 2-> 4->9->7->10->1->3->5->7->9->11-> None
+        if list1.tail.get_data() is not list2.tail.get_data():
+            return False
+
+        shorter= list1 if len(list1) < len(list2) else list2
+        longer = list2 if len(list1) < len(list2) else list1
+
+        diff = len(longer) - len(shorter)
+
+        shoter_node, longer_node = shorter.head, longer.head
+
+        for i in range(diff):
+            longer_node = longer_node.next
+
+        while shoter_node.get_data() is not longer_node.get_data():
+            shoter_node = shoter_node.next
+            longer_node= longer_node.next
+        #returns intersecting node
+
+        return longer_node.get_data()
+
+    def loop_Detection(self):
+        slow = self.head
+        fast = slow
+
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            slow= slow.next
+
+            if fast is slow:
+                break
+
+        if fast is None or fast.next is None:
+            return None
+
+        slow = self.head
+        while slow is not fast:
+            slow = slow.next
+            fast = fast.next
+
+
+        return fast
+
+
+
+
+
+
+
 
 
 
