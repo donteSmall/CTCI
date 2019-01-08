@@ -313,7 +313,7 @@ class linkedList(object):
 
 #Prints out the values in a LinkedList
 
-class Stack(object):
+class MultiStack(object):
     def __init__(self):
         self.head = None
 
@@ -332,6 +332,8 @@ class Stack(object):
             popped = self.head.data
             self.head = self.head.next
             return popped
+
+
 
 #Original list
 # a-> a->b-> c -> d -> e -> e
