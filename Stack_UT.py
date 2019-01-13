@@ -55,14 +55,8 @@ class stackUnit_Tests(unittest.TestCase):
             self.setOfStack.push(i)
         lst = []
         for _ in range(35):
-            import pdb; pdb.set_trace()
             lst.append(self.setOfStack.pop_at(0))
         self.assertEqual(lst,list(range((35))))
-
-
-
-
-
 
 if __name__ == '__main__':
     unittest.main()

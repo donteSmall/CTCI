@@ -7,11 +7,11 @@ class linked_List_Tests(unittest.TestCase):
         self.list2 = linkedList()
 
 
-    def test_insert_one_element(self):
+    def test_Insert_one_element(self):
         self.list.add_to_beginning("z")
         self.assertTrue(self.list.head.get_data()== 'z')
 
-    def test_insert_two_element(self):
+    def test_Insert_two_element(self):
 
         self.list.add_to_beginning("apple")
         self.list.add_to_beginning("Mango")
@@ -21,7 +21,7 @@ class linked_List_Tests(unittest.TestCase):
         next_element = self.list.head.get_next()
         self.assertTrue(next_element.get_data()== "apple")
 
-    def test_deleted_value_is_removed_from_list(self):
+    def test_Deleted_value_is_removed_from_list(self):
         self.list.add_to_beginning("The")
         self.list.add_to_beginning("quick")
         self.list.add_to_beginning("brown")
@@ -34,7 +34,7 @@ class linked_List_Tests(unittest.TestCase):
         self.list.delete("quick")
         self.assertTrue(self.list.head.get_next() is None )
 
-    def test_add_multiple(self):
+    def test_Add_multiple(self):
 
         self.list.add_multiple(["Mix","More", "Food"])
 
@@ -44,34 +44,22 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(self.list.head.next.get_data(), "More")
         self.assertEqual(self.list.head.next.next.get_data(), "Food")
 
-    def test_len(self):
+    def test_Len(self):
         self.list.add_multiple(["Mix","More", "Food"])
         self.assertEqual(self.list.__len__(),3)
         self.list.delete("Food")
         self.assertEqual(self.list.__len__(),2)
 
 
-    def test_search(self):
+    def test_Search(self):
         self.list.add_multiple(["Mix","More", "Food"])
         result=self.list.search("More")
         self.assertEqual(result.get_data(),"More")
         result2=self.list.search("Food")
         self.assertEqual(result2.get_data(),"Food")
 
-    # def test_remove_duplicates(self):
-    #     self.list.add_to_beginning("a")
-    #     self.list.add_to_beginning("a")
-    #     self.list.add_to_beginning("b")
-    #     self.list.add_to_beginning("c")
-    #     self.list.add_to_beginning("c")
-    #     self.list.add_to_beginning("c")
-    #     self.list.add_to_beginning("d")
-    #     self.list.add_to_beginning("e")
-    #     self.list.add_to_beginning("e")
-    #     result = self.list.remove_duplicates()
-    #     self.assertEqual(result, ['a','b','c','d','e'])
 
-    def test_remove_duplicates_2(self):
+    def test_Remove_duplicates_2(self):
         head = Node(1,Node(3,Node(3,Node(1,Node(5,None)))))
         self.list.remove_duplicates_2(head)
         self.assertEqual(head.data,1)
@@ -79,7 +67,7 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(head.next.next.data,5)
         self.assertEqual(head.next.next.next,None)
 
-    def test_delete_middle(self):
+    def test_Delete_middle(self):
         head = Node(1,Node(2,Node(3,Node(4))))
 
         self.list.delete_middle(head.next.next)
@@ -90,7 +78,7 @@ class linked_List_Tests(unittest.TestCase):
 
         self.assertEqual(head.next.next.data, 3)
 
-    def test_kth_to_last(self):
+    def test_Kth_to_last(self):
         head = Node(1,Node(2,Node(3,Node(4,Node(5,Node(6,Node(7)))))))
         self.assertEqual(None, self.list.kth_to_last(head, 0));
         self.assertEqual(7, self.list.kth_to_last(head, 1).data)
@@ -100,7 +88,7 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(1, self.list.kth_to_last(head, 7).data)
         self.assertEqual(None, self.list.kth_to_last(head, 8))
 
-    def test_partition(self):
+    def test_Partition(self):
         #Not working as expected, list is being generated based off of order!
         self.list.add_to_beginning(3)
         self.list.add_to_beginning(8)
@@ -113,7 +101,7 @@ class linked_List_Tests(unittest.TestCase):
         head2 = header.partition(5)
         self.assertEqual(str(head2), '3,1,2,10,5,5,8')
 
-    def test_sum_lists(self):
+    def test_Sum_lists(self):
         self.list.add(5)
         self.list.add(6)
         self.list.add(3)
@@ -125,7 +113,7 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(str(result) ,'3,1,6')
 
 
-    def test_if_palindrome(self):
+    def test_If_palindrome(self):
         self.list.add("R")
         self.list.add("A")
         self.list.add("D")
@@ -139,7 +127,7 @@ class linked_List_Tests(unittest.TestCase):
         self.list2.add("T")
         self.assertEqual(self.list2.panlidrome(),False )
 
-    def test_intersection(self):
+    def test_Intersection(self):
         self.list.add("1")
         self.list.add("3")
         self.list.add("5")
@@ -155,26 +143,6 @@ class linked_List_Tests(unittest.TestCase):
 
         result= self.list.intersection(self.list,self.list2)
         self.assertEqual(result,'9')
-
-    def test_loop_detection(self):
-        self.list.add("A")
-        self.list.add("B")
-        self.list.add("C")
-        self.list.add("D")
-        self.list.add("E")
-        self.list.add("C")
-
-
-        # result = self.list.loop_Detection()
-        # self.assertEqual(result, "C")
-
-
-
-
-
-
-
-
 
 
 

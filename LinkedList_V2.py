@@ -6,20 +6,16 @@ class Node(object):
         self.next = next
         self.prev = prev
 
-    # def __str__(self):
-    #
-    #     return str(self.data)
-
-    def get_data(self):
+    def get_Data(self):
         return self.data
 
-    def get_next(self):
+    def get_Next(self):
         return self.next
 
-    def set_pointer_to_next(self, new_next):
+    def set_Pointer_to_next(self, new_next):
         self.next = new_next
 
-    def has_next(self):
+    def has_Next(self):
         if self.get_next() is None:
             return False
         return True
@@ -71,7 +67,7 @@ class linkedList(object):
 
         return self.tail
 
-    def add_multiple(self, data):
+    def add_Multiple(self, data):
 
         for value in data:
             self.add(value)
@@ -82,7 +78,7 @@ class linkedList(object):
 
 
 
-    def add_to_beginning(self,value):
+    def add_To_beginning(self,value):
 
         if self.head is None:
             self.tail = self.head = Node(value)
@@ -91,7 +87,7 @@ class linkedList(object):
         return self.head
 
 
-    def return_size_of_list(self):
+    def return_Size_of_list(self):
         current_item_in_list = self.head
         count = 0
         while current_item_in_list:
@@ -136,12 +132,12 @@ class linkedList(object):
             previous.set_pointer_to_next(current_item_in_list.get_next())
 
 
-    def delete_middle(node):
+    def delete_Middle(node):
         next = node.next
         node.data = node.data
         node.next = next.next
 
-    def remove_duplicates(self):
+    def remove_Duplicates(self):
             current_item_in_list = self.head
             while current_item_in_list is not None:
                 runner = current_item_in_list
@@ -156,7 +152,7 @@ class linkedList(object):
 
                 current_item_in_list = current_item_in_list.get_next()
 
-    def remove_duplicates_2(self,head):
+    def remove_Duplicates_2(self,head):
         node= head
 
         if node:
@@ -169,12 +165,12 @@ class linkedList(object):
                     node = node.next
         return head
 
-    def delete_middle(self,node):
+    def delete_Middle(self,node):
         next = node.next
         node.data = node.data
         node.next = next.next
 
-    def kth_to_last(self,head, k):
+    def kth_To_last(self,head, k):
         lead,follow = head, head
         for _ in xrange(k):
             if not lead:
@@ -204,7 +200,7 @@ class linkedList(object):
             self.tail.next = None
         return self.head
 
-    def sum_lists(self,llist1):
+    def sum_Lists(self,llist1):
         primary_list = self.head
         secondary_list = llist1.head
         sum_list = linkedList()
@@ -290,16 +286,7 @@ class linkedList(object):
         return fast
 
 
-
-
-
-
-
-
-
-
-
-    def print_list(self):
+    def print_List(self):
         print("Print List.................")
         if self.head is None:
             return
@@ -333,8 +320,6 @@ class MultiStack(object):
             self.head = self.head.next
             return popped
 
-
-
 #Original list
 # a-> a->b-> c -> d -> e -> e
 #Expected list
@@ -347,19 +332,3 @@ class DoublyLinkedList(linkedList):
             self.tail.next = Node(data)
             self.tail = self.tail.next
         return self
-
-# def main():
-#     l = linkedList()
-#     l.add_to_beginning("a")
-#     l.add_to_beginning("a")
-#     l.add_to_beginning("b")
-#     l.add_to_beginning("c")
-#     l.add_to_beginning("c")
-#     l.add_to_beginning("c")
-#     l.add_to_beginning("d")
-#     l.add_to_beginning("e")
-#     l.add_to_beginning("e")
-#     l.search('d')
-#     l.print_list()
-#     l.remove_duplicates()
-#     l.primary_listrint_list()

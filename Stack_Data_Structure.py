@@ -89,7 +89,7 @@ class Stack(object):
     def __len__(self):
         return len(self.items)
 
-    def is_pren_balanced(self,paren_string):
+    def is_Pren_balanced(self,paren_string):
         is_balanced = True
         indx= 0
         while indx < len(paren_string) and is_balanced:
@@ -114,12 +114,12 @@ class SetOfStack(object):
         self.capacity = capacity
         self.stacks = []
 
-    def get_last_stack(self):
+    def get_Last_stack(self):
         if not self.stacks:
             return None
         return self.stacks[-1]
 
-    def is_empty(self):
+    def is_Empty(self):
         last = self.get_last_stack()
         return not last or last.is_empty()
 
@@ -140,10 +140,10 @@ class SetOfStack(object):
         if last.size ==0:
             del self.stacks[-1]
             return value
-    def pop_at(self, index):
-        return self.left_shift(index, True)
+    def pop_At(self, index):
+        return self.left_Shift(index, True)
 
-    def left_shift(self, index, remove_top):
+    def left_Shift(self, index, remove_top):
         stack= self.stacks[index]
         removed_item = stack.pop_() if remove_top else stack.remove_bottom()
         if stack.is_empty():
@@ -158,12 +158,12 @@ class SetOfStack(object):
 
 
 
-#s = Stack()
-# print(s.is_empty())
-# s.push('A')
-# s.push('B')
-# print(s.get_stack())
-# s.push('C')
-# print(s.get_stack())
-# s.pop()
-# print(s.get_stack())
+s = Stack()
+print(s.is_empty())
+s.push('A')
+s.push('B')
+print(s.get_stack())
+s.push('C')
+print(s.get_stack())
+s.pop()
+print(s.get_stack())
