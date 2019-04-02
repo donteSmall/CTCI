@@ -1,14 +1,18 @@
 from random import randint
 import unittest
+
 class Node(object):
     def __init__(self,value):
         self.value = value
         self.left = left
         self.right = right
+
 def create_array(size = 10, max= 50):
 
     return [randint(0,max) for _ in range(size)]
-
+def swap(s1, s2):
+    s1, s2 = s2, s1
+    return s1,s2
 
 def merge(list1,list2):
     merge_list = []
@@ -45,7 +49,12 @@ def bubble_SORT(input):
         for j in range(0, len(input) - 1 - idx):
             if input[j] > input[j+1]:
                 #Swapping values based on condition.
+
                 input[j], input[j + 1]  = input[j + 1],input[j]
+
+                #Issue with swap function !!!
+                #swap(input[j + 1],input[j])
+
                 # Why does this break if assigned differently ??
     return input
 
@@ -74,6 +83,7 @@ def insert_SORTOptimized(input):
                 input[idx_lft + 1] = curNum
                 break
     return input
+
 '''
  This is faster as swapping requires three opertions :
  temp = x
