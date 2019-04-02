@@ -17,35 +17,48 @@ class Stack(object):
         #     raise NameError("A stack is greater than one")
         # else:
         self.capacity = capacity
+    def get_stack(self):
+        return self.items
+
+    def is_empty(self):
+        return self.items == []
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+    def __len__(self):
+        return len(self.items)
+
     def push(self,item):
         self.items.append(item)
+
     def is_Full(self):
         return self.size == self.capacity
+
     def pop(self):
         if self.items == []:
             raise NameError("Can't pop an empty stack")
         else:
             popped_data = self.items[-1][-1]
         if len(self.items[-1])== 1:
-
             del self.items[-1]
         else:
             del self.items[-1][-1]
         return popped_data
+
     def pop_(self):
-        if not self.top:
-            return None
-        t = self.top
-        self.top = self.top.below
-        self.size -= 1
-        return t.value
+        if not len(self.items):
+         return None
+        item = self.top
+
+        return self.items.pop()
 
 
     def popAt(self, index):
         if self.items == []:
             raise NameError("Can't pop an empty staack")
 
-        elif index -1 > len(self.items):
+        elif index - 1 > len(self.items):
             raise NameError("Index is out of range")
         else:
             popped_data = self.items[index-1][-1]
@@ -67,15 +80,7 @@ class Stack(object):
                     del self.items[-1]
         return popped_data
 
-    def get_stack(self):
-        return self.items
 
-    def is_empty(self):
-        return self.items == []
-
-    def peek(self):
-        if not self.is_empty():
-            return self.items[-1]
 
     def is_Match(self,p1,p2):
         if p1 == "(" and p2 == ")":
@@ -86,8 +91,7 @@ class Stack(object):
             return True
         else:
             return False
-    def __len__(self):
-        return len(self.items)
+
 
     def is_Pren_balanced(self,paren_string):
         is_balanced = True
@@ -108,6 +112,14 @@ class Stack(object):
             return True
         else:
             return False
+
+class current():
+  def __init__(self, data=None, next=None):
+    self.data, self.next = data, next
+
+  def __str__(self):
+      return str(self and self.data) + ',' + str(self and self.next)
+
 
 class SetOfStack(object):
     def __init__(self,capacity):
@@ -132,6 +144,7 @@ class SetOfStack(object):
             stack = Stack(self.capacity)
             stack.push(value)
             self.stacks.append(stack)
+
     def pop(self):
         last = self.get_last_stack()
         if not last:
@@ -140,6 +153,7 @@ class SetOfStack(object):
         if last.size ==0:
             del self.stacks[-1]
             return value
+
     def pop_At(self, index):
         return self.left_Shift(index, True)
 
@@ -155,15 +169,12 @@ class SetOfStack(object):
 
 
 
-
-
-
-s = Stack()
-print(s.is_empty())
-s.push('A')
-s.push('B')
-print(s.get_stack())
-s.push('C')
-print(s.get_stack())
-s.pop()
-print(s.get_stack())
+# s = Stack()
+# print(s.is_empty())
+# s.push('A')
+# s.push('B')
+# print(s.get_stack())
+# s.push('C')
+# print(s.get_stack())
+# s.pop()
+# print(s.get_stack())

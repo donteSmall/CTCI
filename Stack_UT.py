@@ -1,10 +1,13 @@
 import unittest
-from Stack_Data_Structure import Stack,SetOfStack
+from Stack_Data_Structure import Stack, SetOfStack
+from QueueViaStack import QueueViaStacks_problem
 
 class stackUnit_Tests(unittest.TestCase):
     def setUp(self):
         self.stack = Stack()
         self.setOfStack = SetOfStack(5)
+        self.queue = QueueViaStacks_problem()
+
 
     def test_peek(self):
         self.stack.push('A')
@@ -32,15 +35,15 @@ class stackUnit_Tests(unittest.TestCase):
 
     def test_is_paren_balanced(self):
     # (), ()(), (({[]}))  <- Balanced.
-        self.assertTrue(self.stack.is_pren_balanced("()"))
-        self.assertFalse(self.stack.is_pren_balanced("{{{)}]"))
-        self.assertFalse(self.stack.is_pren_balanced("[][]]]"))
+        self.assertTrue(self.stack.is_Pren_balanced("()"))
+        self.assertFalse(self.stack.is_Pren_balanced("{{{)}]"))
+        self.assertFalse(self.stack.is_Pren_balanced("[][]]]"))
 
     def test_is_paren_Not_balanced(self):
      #((), {{{)}], [][]]] <- Not Balanced.
-        self.assertFalse(self.stack.is_pren_balanced("[][]]]"))
-        self.assertTrue(self.stack.is_pren_balanced("()()"))
-        self.assertTrue(self.stack.is_pren_balanced("(({[]}))"))
+        self.assertFalse(self.stack.is_Pren_balanced("[][]]]"))
+        self.assertTrue(self.stack.is_Pren_balanced("()()"))
+        self.assertTrue(self.stack.is_Pren_balanced("(({[]}))"))
 
     def test_len__(self):
         self.stack.push('A')
@@ -49,14 +52,13 @@ class stackUnit_Tests(unittest.TestCase):
         self.stack.push('D')
         self.assertEqual(self.stack.__len__(),4)
 
-    def test_stacks(self):
-        for i in range(35):
+    def test_queue_via_stacks(self):
 
-            self.setOfStack.push(i)
-        lst = []
-        for _ in range(35):
-            lst.append(self.setOfStack.pop_at(0))
-        self.assertEqual(lst,list(range((35))))
+        self.queue.add(11)
+        self.queue.add(22)
+        self.queue.add(33)
+        self.assertEqual(self.queue.remove(), 11 )
+
 
 if __name__ == '__main__':
     unittest.main()
