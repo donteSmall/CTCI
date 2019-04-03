@@ -11,8 +11,8 @@ def create_array(size = 10, max= 50):
 
     return [randint(0,max) for _ in range(size)]
 def swap(s1, s2):
-    s1, s2 = s2, s1
-    return s1,s2
+
+    return s2,s1
 
 def merge(list1,list2):
     merge_list = []
@@ -53,7 +53,7 @@ def bubble_SORT(input):
                 input[j], input[j + 1]  = input[j + 1],input[j]
 
                 #Issue with swap function !!!
-                #swap(input[j + 1],input[j])
+                #swap(input[j],input[j + 1])
 
                 # Why does this break if assigned differently ??
     return input
@@ -108,6 +108,39 @@ def selection_SORT(input):
             input[idx],input[min_Idx] = input[min_Idx],input[idx]
 
     return input
+quick_TEMP= [1,4,5,7,0,6,2,8,9,3]
+
+def quick_SORT(list_SORT,low_idx,high_idx):
+
+    if(high_idx - low_idx > 0):
+        seperator = partition(list_SORT,low_idx,high_idx)
+
+        #sort the lower portion of the list
+        quick_SORT(list_SORT,low_idx,seperator - 1)
+
+        #sort the higher portion of the list
+        quick_SORT(list_SORT,seperator + 1,high_idx)
+
+
+def partition(list_SORT,low_idx,high_idx):
+    list_DIVIDER = low_idx
+    pivot = high_idx
+
+    #compare to every element in list
+    for val in range(low_idx,high_idx):
+
+        if (list_SORT[val] < list_SORT[pivot]):
+
+            list_SORT[val], list_SORT[list_DIVIDER] = list_SORT[list_DIVIDER],list_SORT[val]
+            list_DIVIDER +=1
+
+    list_SORT[pivot], list_SORT[list_DIVIDER] = list_SORT[list_DIVIDER],list_SORT[pivot]
+    #where pivot val resides
+    return list_DIVIDER
+
+
+
+
 
 
 
@@ -140,6 +173,12 @@ class Test(unittest.TestCase):
         data = [1,3,5,7,2,2,1,6,9,9,6,55]
         expected = [1, 1, 2, 2, 3, 5, 6, 6, 7, 9, 9, 55]
         self.assertEqual(insert_SORT(data),expected)
+
+    def test_quick_SORT(self):
+        data = [1,0,2,3,4,6,5,8,9,7]
+        quick_SORT(data,0,9)
+        expected = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        self.assertEqual(data,expected)
 
 
 
