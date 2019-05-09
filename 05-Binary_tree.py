@@ -10,7 +10,7 @@ class Node(object):
 
 
 class BinaryTree(object):
-    def __init__(self, root):
+    def __init__(self,root):
         #Assumes a value will be passed into the tree Node(root)
         self.root = Node(root)
 
@@ -53,17 +53,30 @@ class BinaryTree(object):
     def __repr__(self):
         return "--> " + str(self.root)
 
-    def listOfDepths(root):
-        tracker ={}
-        if (root== None):return
-        if root:
-            #Not going to traver the tree, just going through a process
-            for value in root:
-                if value not in tracker:
-                    tracker[value] = 1
-                else:
-                    tracker[tail.append(value)] += 1
-        return tracker.key
+
+    def lod(self,bt):
+        start = self.root
+        explored = []
+        queue = [start]
+        levels= {}
+        levels[start]=0
+        visited= [start]
+        if queue:
+            node = queue.pop(0)
+            explored.append(node)
+
+
+            #parent = bt[node]
+            import pdb; pdb.set_trace()
+            for child in bt:
+                if child not in visited:
+                    queue.append(child)
+                    visited.append(child)
+                    levels[child] = levels[node]+1
+        return explored
+
+
+
 
 
 tree = BinaryTree(8)
@@ -73,8 +86,8 @@ tree.root.left.left = Node(2)
 tree.root.left.right = Node(6)
 tree.root.right.right = Node(20)
 
-ex = tree.listOfDepths()
-print(ex.__repr__())
+reciever = BinaryTree(tree).lod(tree)
+
 
 
 
