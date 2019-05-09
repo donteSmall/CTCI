@@ -18,7 +18,7 @@ class AnimalShelter():
         else:
             return self.dequeueDog()
 
-    
+
     def dequeueCats(self):
         if len(self.cats) == 0:
             return None
@@ -75,13 +75,6 @@ class Test(unittest.TestCase):
        self.assertEqual(str(self.shelter.dequeueDog()),'None')
        self.shelter.enqueue(Dog("Red"))
        self.assertEqual(str(self.shelter.dequeueDog()),'Red')
-
-
-
-
-
-
-
 
 
 if __name__=="__main__":

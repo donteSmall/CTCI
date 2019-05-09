@@ -5,6 +5,10 @@ class Node(object):
         self.left = None
         self.right = None
 
+    def __repr__(self):
+        return  str(self.value)
+
+
 class BinaryTree(object):
     def __init__(self, root):
         #Assumes a value will be passed into the tree Node(root)
@@ -28,6 +32,7 @@ class BinaryTree(object):
             traversal = self.preOrder(start.left,traversal)
             traversal = self.preOrder(start.right,traversal)
         return traversal
+
     def inOrder(self,start, traversal):
         #  Left->Root ->Right
         if start:
@@ -44,6 +49,32 @@ class BinaryTree(object):
             traversal += (str(start.value)+ "-")
 
         return traversal
+
+    def __repr__(self):
+        return "--> " + str(self.root)
+
+    def listOfDepths(root):
+        tracker ={}
+        if (root== None):return
+        if root:
+            #Not going to traver the tree, just going through a process
+            for value in root:
+                if value not in tracker:
+                    tracker[value] = 1
+                else:
+                    tracker[tail.append(value)] += 1
+        return tracker.key
+
+
+tree = BinaryTree(8)
+tree.root.left = Node(4)
+tree.root.right = Node(10)
+tree.root.left.left = Node(2)
+tree.root.left.right = Node(6)
+tree.root.right.right = Node(20)
+
+ex = tree.listOfDepths()
+print(ex.__repr__())
 
 
 

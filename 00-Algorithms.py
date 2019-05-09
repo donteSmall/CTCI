@@ -108,45 +108,50 @@ def selection_SORT(input):
             input[idx],input[min_Idx] = input[min_Idx],input[idx]
 
     return input
+
 quick_TEMP= [1,4,5,7,0,6,2,8,9,3]
 
-def quick_SORT(list_SORT,low_idx,high_idx):
 
-    if(high_idx - low_idx > 0):
+def quick_SORT(list_SORT,low_idx,high_idx):
+    #When the indexs are the same
+
+    if((high_idx - low_idx) > 0):
+        #contine
         seperator = partition(list_SORT,low_idx,high_idx)
+        #Produces two more list to sort
 
         #sort the lower portion of the list
         quick_SORT(list_SORT,low_idx,seperator - 1)
 
         #sort the higher portion of the list
         quick_SORT(list_SORT,seperator + 1,high_idx)
+        #when it gets down to the last element, it returns
 
-
+#O(n) n,the size of the list, operations to iter list
+# The list is partition for every element. However if the list randomized we would have to iter every element.
+# We would only need to perform it (log n) times as that is how deep the recursion tree will be.
 def partition(list_SORT,low_idx,high_idx):
     list_DIVIDER = low_idx
     pivot = high_idx
 
-    #compare to every element in list
-    for val in range(low_idx,high_idx):
 
+    for val in range(low_idx,high_idx):
+        #compare to every element in list
         if (list_SORT[val] < list_SORT[pivot]):
 
             list_SORT[val], list_SORT[list_DIVIDER] = list_SORT[list_DIVIDER],list_SORT[val]
+            #increment to next element in the list
             list_DIVIDER +=1
 
     list_SORT[pivot], list_SORT[list_DIVIDER] = list_SORT[list_DIVIDER],list_SORT[pivot]
+
     #where pivot val resides
     return list_DIVIDER
-
-
-
-
-
-
+#O(n log n)
 
 
 ex = merge_sort(create_array())
-#print(ex)
+print(ex)
 
 class Test(unittest.TestCase):
     def setUp(self):

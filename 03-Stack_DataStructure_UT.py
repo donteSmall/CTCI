@@ -1,6 +1,6 @@
 import unittest
-from Stack_Data_Structure import Stack, SetOfStack
-from QueueViaStack import QueueViaStacks_problem
+from Stack_DataStructure_03 import Stack, SetOfStack
+from QueueViaStack_04 import QueueViaStacks_problem
 
 class stackUnit_Tests(unittest.TestCase):
     def setUp(self):

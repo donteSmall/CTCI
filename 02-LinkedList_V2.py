@@ -12,7 +12,7 @@ class Node(object):
     def get_Next(self):
         return self.next
 
-    def set_Pointer_to_next(self, new_next):
+    def set_PointerTonext(self, new_next):
         self.next = new_next
 
     def has_Next(self):
@@ -78,7 +78,7 @@ class linkedList(object):
 
 
 
-    def add_To_beginning(self,value):
+    def add_To_Beginning(self,value):
 
         if self.head is None:
             self.tail = self.head = Node(value)
@@ -102,10 +102,10 @@ class linkedList(object):
         found = False
 
         while current_item_in_list and found is False:
-            if current_item_in_list.get_data() == data:
+            if current_item_in_list.get_Data() == data:
                 return current_item_in_list
             else:
-                current_item_in_list = current_item_in_list.get_next()
+                current_item_in_list = current_item_in_list.get_Next()
         if current_item_in_list is None:
             raise ValueError("Data not in list")
         return current_item_in_list
@@ -117,19 +117,19 @@ class linkedList(object):
         found = False
         while current_item_in_list and found is False:
 
-            if current_item_in_list.get_data() == data:
+            if current_item_in_list.get_Data() == data:
                 found = True
             else:
                 previous = current_item_in_list
-                current_item_in_list = current_item_in_list.get_next()
+                current_item_in_list = current_item_in_list.get_Next()
 
         if current_item_in_list is None:
             raise ValueError("Data not in list")
 
         if previous is None:
-            self.head = current_item_in_list.get_next()
+            self.head = current_item_in_list.get_Next()
         else:
-            previous.set_pointer_to_next(current_item_in_list.get_next())
+            previous.set_PointerTonext(current_item_in_list.get_Next())
 
 
     def delete_Middle(node):
@@ -200,7 +200,7 @@ class linkedList(object):
             self.tail.next = None
         return self.head
 
-    def sum_Lists(self,llist1):
+    def sum_lists(self,llist1):
         primary_list = self.head
         secondary_list = llist1.head
         sum_list = linkedList()
@@ -243,7 +243,7 @@ class linkedList(object):
 
     # ab: 1-> 3-> 5->7->9->11->2->4->9->11->None
     # ba: 2-> 4->9->7->10->1->3->5->7->9->11-> None
-        if list1.tail.get_data() is not list2.tail.get_data():
+        if list1.tail.get_Data() is not list2.tail.get_Data():
             return False
 
         shorter= list1 if len(list1) < len(list2) else list2
@@ -256,12 +256,12 @@ class linkedList(object):
         for i in range(diff):
             longer_node = longer_node.next
 
-        while shoter_node.get_data() is not longer_node.get_data():
+        while shoter_node.get_Data() is not longer_node.get_Data():
             shoter_node = shoter_node.next
             longer_node= longer_node.next
         #returns intersecting node
 
-        return longer_node.get_data()
+        return longer_node.get_Data()
 
     def loop_Detection(self):
         slow = self.head
