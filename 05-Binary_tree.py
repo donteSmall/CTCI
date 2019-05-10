@@ -82,12 +82,12 @@ def insert(self, data):
             self.value= data
 
 def inorderTraversal(root):
-        res = []
+        result = []
         if root:
-            res = inorderTraversal(root.left)
-            res.append(root.value)
-            res +=inorderTraversal(root.right)
-        return res
+            result = inorderTraversal(root.left)
+            result.append(root.value)
+            result +=inorderTraversal(root.right)
+        return result
 
 def lod(bt):
     start = bt
@@ -103,10 +103,11 @@ def lod(bt):
             import pdb; pdb.set_trace()
             levels[node] += 1
             for child in (br.left, bt.right):
+                    #could get the value and add it to the dic
                 next_value = [x for x in child if br.value < bt.right if br.value > br.left]
                 levels[next_value] +=1
 
-                #could get the value and add it to the queue
+
 
                 if bt.right:
                     queue.append(bt.left)
