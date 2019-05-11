@@ -1,15 +1,34 @@
 import unittest
+
+
+
+class Queue(object):
+    def __init__(self):
+        self.items = []
+    def enqueue(self,item):
+        self.items.insert(0,item)
+    def dequeue(self):
+        if not self.is_empty():
+            import pdb; pdb.set_trace()
+            return self.items.pop()
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def peek(self):
+       if not self.is_empty():
+           return self.items[-1].value
+
+    def __len__(slef):
+        return len(self.items)
+    def __repr__(self):
+        return "Queue(%r)" % (self.items)
+
+
 class Node(object):
     def __init__(self,value):
         self.value = value
         self.left = None
         self.right = None
-        self.depth = None
-
-        # if self.left > value:
-        #     self.next = self.left
-        # else:
-        #     self.next = self.left
 
     def __repr__(self):
         if self.left is None and self.right is None:
@@ -19,10 +38,24 @@ class Node(object):
         return s
     def __iter__(self):
 
-        current = self.value
-        while current is not None:
-            yield current
-            current = current.next
+        if self.left != None:
+            for elem in self.left:
+                yield elem
+
+        yield self.value
+
+        if self.right != None:
+            for elem in self.left:
+                yield elem
+
+    def __len__(self):
+        total = 1
+        if self.left is not None:
+            total += self.left.__len__()
+        if self.right is not None:
+            total += self.right.__len__()
+        return total
+
     def __getItem__(slef):
         return self.value
 
@@ -90,31 +123,25 @@ def inorderTraversal(root):
         return result
 
 def lod(bt):
-    start = bt
-    explored = []
-    queue = [start.value]
-    levels= {}
-    levels[start.value]=0
+    if bt is None:
+        return
+    explored = Queue()
+    explored.enqueue(bt)
+    explored_items = ""
+    #levels= {}
+    #explored.append(bt)
+    while len(bt) > 0:
+        explored_items += str(explored.peek()) + "-"
 
-    while bt:
-        node = queue.pop(0)
-        if node not in explored:
-            explored.append(node)
-            import pdb; pdb.set_trace()
-            levels[node] += 1
-            for child in (br.left, bt.right):
-                    #could get the value and add it to the dic
-                next_value = [x for x in child if br.value < bt.right if br.value > br.left]
-                levels[next_value] +=1
+        import pdb; pdb.set_trace()
+        node = explored.dequeue()
 
+        if node.left:
+            explored.enqueue(node.left)
+        if node.right:
+            explored.enqueue(node.right)
 
-
-                if bt.right:
-                    queue.append(bt.left)
-                else:
-                    queue.append(bt.right)
-
-    return explored
+    return explored_items
 
     # if(bt.left is None):
     #     import pdb; pdb.set_trace()
@@ -139,7 +166,7 @@ tree.left.right = Node(6)
 tree.right.right = Node(20)
 
 reciever = lod(tree)
-print(reciever)
+print("Data here :-> "+str(reciever ))
 
 
 #        1
@@ -182,6 +209,3 @@ class Test(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-#print(tree.print_tree("preOrder"))
-#print(tree.print_tree("inorder"))
-#print(tree.print_tree("postorder"))
