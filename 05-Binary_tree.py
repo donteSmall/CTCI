@@ -9,7 +9,6 @@ class Queue(object):
         self.items.insert(0,item)
     def dequeue(self):
         if not self.is_empty():
-            import pdb; pdb.set_trace()
             return self.items.pop()
     def is_empty(self):
         return len(self.items) == 0
@@ -41,9 +40,8 @@ class Node(object):
         if self.left != None:
             for elem in self.left:
                 yield elem
-
         yield self.value
-
+        
         if self.right != None:
             for elem in self.left:
                 yield elem
@@ -123,23 +121,23 @@ def inorderTraversal(root):
         return result
 
 def lod(bt):
-    if bt is None:
+    if bt.value is None:
         return
     explored = Queue()
     explored.enqueue(bt)
     explored_items = ""
     #levels= {}
     #explored.append(bt)
-    while len(bt) > 0:
+    while bt:
         explored_items += str(explored.peek()) + "-"
-
-        import pdb; pdb.set_trace()
         node = explored.dequeue()
 
-        if node.left:
-            explored.enqueue(node.left)
-        if node.right:
-            explored.enqueue(node.right)
+        if node is not None:
+            if node.left :
+                explored.enqueue(node.left)
+            if node.right :
+                explored.enqueue(node.right)
+
 
     return explored_items
 
