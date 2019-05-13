@@ -35,13 +35,14 @@ class Node(object):
         else:
             s = '[value:{}, left:{}, right:{}]'.format(self.value, self.left, self.right)
         return s
+
     def __iter__(self):
 
         if self.left != None:
             for elem in self.left:
                 yield elem
         yield self.value
-        
+
         if self.right != None:
             for elem in self.left:
                 yield elem

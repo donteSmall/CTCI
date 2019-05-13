@@ -111,37 +111,28 @@ def max_node(currentnode):
     return maxVal
 
 def min_node(root):
-
-
     current = root
-
-
+    if current.left is not None:
+        root.left = min_node(root.value)
 
     return current.value
 
-
-
-
-
-
-
 class min_nodeTest(unittest.TestCase):
-    def test_when_there_is_no_binarytree_an_None_is_returned(self):
-        self.assertEqual(None, min_node(None))
-
     def test_when_there_is_one_node(self):
         root = Node(5)
         self.assertEqual(5, min_node(root))
 
+    def test_when_there_is_two_nodes_in_binary_tree_the_min_is_returned(self):
         root = Node(5)
-        binary_search_insert(root,8)
+        binary_search_insert(root,6)
+        binary_search_insert(root,9)
         self.assertEqual(5,min_node(root))
 
-    # def test_when_there_is_three_nodes_in_binary_tree_left_min_is_returned(self):
-    #     root = Node(5)
-    #     binary_search_insert(root,8)
-    #     binary_search_insert(root,4)
-    #     self.assertEqual(4,min_node(root))
+    def test_when_there_is_three_nodes_in_binary_tree_left_min_is_returned(self):
+        root = Node(5)
+        binary_search_insert(root,8)
+        binary_search_insert(root,4)
+        self.assertEqual(4,min_node(root))
 
 class max_nodeTest(unittest.TestCase):
     def test_when_there_is_no_binarytree_an_Zero_is_returned(self):
