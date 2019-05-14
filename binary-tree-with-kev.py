@@ -8,6 +8,13 @@ class Node(object):
         self.left = None
         self.right = None
 
+    def __repr__(self):
+        if self.left is None and self.right is None:
+            s = '{}'.format(self.value)
+        else:
+            s = '[value:{}, left:{}, right:{}]'.format(self.value, self.left, self.right)
+        return s
+
 
 def binary_search_insert(root, new_value):
     if root is None:
@@ -111,11 +118,19 @@ def max_node(currentnode):
     return maxVal
 
 def min_node(root):
-    current = root
-    if current.left is not None:
-        root.left = min_node(root.value)
+    current = root.value
 
-    return current.value
+    # If there is a left and right child, take the min value between nodes
+    if root.left and root.right:
+        if root.left.value < root.right.value:
+            return min_node(root.left)
+
+    if root.left:
+        left = root.left
+        return left.value
+
+    return current
+
 
 class min_nodeTest(unittest.TestCase):
     def test_when_there_is_one_node(self):
@@ -123,16 +138,26 @@ class min_nodeTest(unittest.TestCase):
         self.assertEqual(5, min_node(root))
 
     def test_when_there_is_two_nodes_in_binary_tree_the_min_is_returned(self):
-        root = Node(5)
-        binary_search_insert(root,6)
-        binary_search_insert(root,9)
-        self.assertEqual(5,min_node(root))
-
-    def test_when_there_is_three_nodes_in_binary_tree_left_min_is_returned(self):
-        root = Node(5)
-        binary_search_insert(root,8)
+        root = Node(6)
         binary_search_insert(root,4)
+        binary_search_insert(root,9)
         self.assertEqual(4,min_node(root))
+
+    def test_when_there_is_three_nodes_in_binary_tree_left_minVal_is_returned(self):
+        root = Node(5)
+        binary_search_insert(root,4)
+        binary_search_insert(root,8)
+        self.assertEqual(4,min_node(root))
+
+    def test_when_there_is_three_nodes_in_binary_tree_left_minVal_is_returned(self):
+        root = Node(7)
+        binary_search_insert(root,4)
+        binary_search_insert(root,2)
+        binary_search_insert(root,9)
+
+        self.assertEqual(2,min_node(root))
+
+
 
 class max_nodeTest(unittest.TestCase):
     def test_when_there_is_no_binarytree_an_Zero_is_returned(self):
