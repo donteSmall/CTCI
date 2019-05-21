@@ -108,8 +108,8 @@ def max_node(currentnode):
     if currentnode is None:
         return 0
     maxVal = currentnode.value
-    leftNode= max_node(currentnode.left)
-    rightNode= max_node(currentnode.right)
+    leftNode= max_node(currentnode.left.value)
+    rightNode= max_node(currentnode.right.value)
     if leftNode > maxVal:
         maxVal = leftNode
 
@@ -118,8 +118,7 @@ def max_node(currentnode):
     return maxVal
 
 def min_node(root):
-    current = root.value
-
+    current = root.values
     # If there is a left and right child, take the min value between nodes
     if root.left and root.right:
         if root.left.value < root.right.value:
