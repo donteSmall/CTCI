@@ -2,6 +2,7 @@
 
 import unittest
 import itertools
+from functools import reduce
 
 class Node(object):
     def __init__(self, value):
@@ -92,53 +93,55 @@ def map_reduce_lod(root):
 '''
 Write an ‘each’ which calls a function with each item in a collection
 '''
-def call_TOEACHFUNC(value):
 
 
-    def each__(root):
-        result = []
-        if root.value:
-            result.append(root.value)
-        else:
-            return None
-        if root.left and root.right is not None:
-            for pair in itertools.zip_longest((map_reduce_lod(root.left)+ map_reduce_lod(root.right))):
-                for items in pair:
-                    result.append(items[0])
-            return result
-    '''
-    A ‘map’ function, which calls a function for each item in a
-    collection and returns all of the results in a list.
-    '''
-    def map_TOEACHITEM(da_list):
-        #import pdb; pdb.set_trace()
-        result = []
-        #addTO = [lambda x: x*x for x in each__(da_list)]
-        for x in each__(da_list):
-             result.append(int(x) - 2)
+
+def each__(root):
+    result = []
+    if root.value:
+        result.append(root.value)
+    else:
+        return None
+    if root.left and root.right is not None:
+        for pair in itertools.zip_longest((map_reduce_lod(root.left)+ map_reduce_lod(root.right))):
+            for items in pair:
+                result.append(items[0])
         return result
-    '''
-    A ‘filter’ function, which calls a function for each item in a collection
-    and returns all of the items where the function returns a truthy value.
-    '''
+'''
+A ‘map’ function, which calls a function for each item in a
+collection and returns all of the results in a list.
+'''
+def map_TOEACHITEM(da_list):
+    return  list(map(lambda x: x - 2, each__(da_list)))
 
-    def callsEvenNum(func):
-        for x in map_TOEACHITEM(func):
-            if not(n % 3):
-                return False
+def map_TOEACHITEMWithNVal(da_list, num):
+    return  list(map(lambda x: x + num, each__(da_list)))
+'''
+A ‘filter’ function, which calls a function for each item in a collection
+and returns all of the items where the function returns a truthy value.
+'''
 
+def filterModOfNum(func):
+    rangeList= range(0,9)
+    return list(filter(lambda x: x % 2==0, map_TOEACHITEM(func)))
 
+'''
+An “accumulate” function that takes an iterable, a function, and an initial value,
+then calls the function with the accumulated value and an item in the iterable.
+The passed function returns a new value which is passed next time the function is called
+'''
+def accumulate(aList):
+    addList= reduce((lambda x,y: x + y), map_TOEACHITEMWithNVal(aList,0))
+    return addList
+'''
+Implement find_first, a function that takes an iterable and
+a function to apply and runs the first item where the function returns truthy
+'''
+def findfirst(firstTruthy):
 
-    return map_TOEACHITEM(value)
+    func =lambda a: "Even Num" if a % 2 == 0 else "Odd Num"
+    return func(firstTruthy)
 
-
-
-varChar = Node(6)
-varChar.left = Node(5)
-varChar.right = Node(8)
-varChar.left.left = Node(4)
-varChar.right.right = Node(9)
-print(call_TOEACHFUNC(varChar))
 
 
 
@@ -203,94 +206,41 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 3)
         binary_search_insert(root, 6)
         binary_search_insert(root, 7)
-
         self.assertEqual([[5], [4,6], [3,7]], list_of_depths(root))
 
 
 
+    def test_calls_a_func_with_each_item_in_collection(self):
+        root = Node(6)
+        binary_search_insert(root, 5)
+        binary_search_insert(root, 8)
+        binary_search_insert(root, 4)
+        binary_search_insert(root, 9)
+        self.assertEqual([4, 3, 2, 6, 7], map_TOEACHITEM(root))
 
-'''
->>> True or False
-True
->>> False or True
-True
->>> None or 5
-5
->>> 5 or None
-5
->>> not not None
-False
->>> not None
-True
->>> None or []
-[]
->>> [1,2,3] or []
-[1, 2, 3]
->>> not not []
-False
->>> import itertools
+    def test_calls_a_func_for_each_item_in_collection_and_returns_all_results(self):
+        root = Node(6)
+        binary_search_insert(root, 5)
+        binary_search_insert(root, 8)
+        binary_search_insert(root, 4)
+        binary_search_insert(root, 9)
+        self.assertEqual([4,2, 6,], filterModOfNum(root))
 
->>> list(itertools.zip_longest([1,2,3], []))
-[(1, None), (2, None), (3, None)]
+    def test_accumulate_func_with_iterable_and_value(self):
+        root = Node(6)
+        binary_search_insert(root, 5)
+        binary_search_insert(root, 8)
+        binary_search_insert(root, 4)
+        binary_search_insert(root, 9)
+        self.assertEqual(32, accumulate(root))
 
->>> list(itertools.zip_longest([[1],[2],[3]], []))
-[([1], None), ([2], None), ([3], None)]
-
->>> list(itertools.zip_longest([[1],[2],[3]], [4]))
-[([1], 4), ([2], None), ([3], None)]
-
->>> list(itertools.zip_longest([[1],[2],[3]], [[4]]))
-[([1], [4]), ([2], None), ([3], None)]
-
->>> [1] + [4]
-[1, 4]
-
->>> [2] + [None]
-[2, None]
-
->>> [2] + []
-[2]
-
->>> [1,2,3] + [4,5]
-
-[1, 2, 3, 4, 5]
-
->>> [1,2,3] + []
-[1, 2, 3]
+    def test_find_first_truthy_val(self):
+        self.assertEqual("Even Num", findfirst(4))
 
 
 
->>> import Kev_Gist
->>> Kev_Gist.in_order_map_reduce
-
->>> map_reduce = Kev_Gist.in_order_map_reduce
->>> insert = Kev_Gist.binary_search_insert
->>> Node = Kev_Gist.Node
 
 
->>> root = Node(5)
->>> root.left = Node(4)
->>> root.right = Node(6)
->>> identity = lambda x: x
-
->>> def sum_via_reduce(left_this_right):
-    left, this, right = left_this_right
-    return (left or 0) + this + (right or 0)
-
->>> product = lambda x: (x[0] or 1) * x[1] * (x[2] or 1)
-
->>> map_reduce(root, lambda x: x * 2, product)
-960
-
->>> map_reduce(root, lambda x: x, product)
-120
-
->>> 5 * 4 * 6
-120
-
->>> 5  * 4 * 6 * 8
-960
-'''
 
 if __name__ == '__main__':
     unittest.main()
