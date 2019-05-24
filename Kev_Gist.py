@@ -91,56 +91,72 @@ def map_reduce_lod(root):
 
     return in_order_map_reduce(root, lod_map, lod_reduce)
 '''
-Write an ‘each’ which calls a function with each item in a collection
+Write an ‘each’ which calls a passed function with each item in a collection
 '''
 
+def each_(f, collection):
+    for item in collection:
+        f(item)
 
+#each_(lambda x: print(x), [1,2,3])
 
-def each__(root):
-    result = []
-    if root.value:
-        result.append(root.value)
-    else:
-        return None
-    if root.left and root.right is not None:
-        for pair in itertools.zip_longest((map_reduce_lod(root.left)+ map_reduce_lod(root.right))):
-            for items in pair:
-                result.append(items[0])
-        return result
 '''
 A ‘map’ function, which calls a function for each item in a
 collection and returns all of the results in a list.
 '''
-def map_TOEACHITEM(da_list):
-    return  list(map(lambda x: x - 2, each__(da_list)))
 
-def map_TOEACHITEMWithNVal(da_list, num):
-    return  list(map(lambda x: x + num, each__(da_list)))
+def mapp(f, collection):
+    result = []
+    for item in collection:
+        result.append(f(item ))
+    return result
+
 '''
 A ‘filter’ function, which calls a function for each item in a collection
 and returns all of the items where the function returns a truthy value.
 '''
-
-def filterModOfNum(func):
-    rangeList= range(0,9)
-    return list(filter(lambda x: x % 2==0, map_TOEACHITEM(func)))
-
+def filterr(f, collection):
+    result=[]
+    for item in collection:
+        #f(item)
+        if f(item):
+            result.append(item)
+    return result
 '''
 An “accumulate” function that takes an iterable, a function, and an initial value,
 then calls the function with the accumulated value and an item in the iterable.
 The passed function returns a new value which is passed next time the function is called
 '''
-def accumulate(aList):
-    addList= reduce((lambda x,y: x + y), map_TOEACHITEMWithNVal(aList,0))
-    return addList
-'''
-Implement find_first, a function that takes an iterable and
-a function to apply and runs the first item where the function returns truthy
-'''
-def findfirst(firstTruthy):
+def accumulatee(iterr, f, val):
+    for item in iterr:
+        val = f(val,item)
+    return val
 
-    func =lambda a: "Even Num" if a % 2 == 0 else "Odd Num"
-    return func(firstTruthy)
+def accumulatee_map(iterr, f, val):
+    resultMapp= []
+    resultfilter = []
+    for item in iterr:
+        val = f(val,item)
+        resultMapp.append(f(item,val))
+        return val,resultMapp
+    if f(item,val):
+        resultfilter.append(item)
+    s = '[value:{}, map:{}, filter:{}]'.format(val, resultMapp, resultfilter)
+    return s
+print(accumulatee_map([1,2,3], lambda x,y: x+y, 0))
+'''
+Implement find_first, a function that takes an iterable and a function to apply and
+runs the first item where the function returns truthy
+'''
+def findfirst(iterr,f):
+    for item in iterr:
+        if f(item):
+            return item
+
+
+
+
+#print(findfirst([1,2,3,4], lambda x: x % 2 == 0))
 
 
 
@@ -208,15 +224,21 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 7)
         self.assertEqual([[5], [4,6], [3,7]], list_of_depths(root))
 
-
-
     def test_calls_a_func_with_each_item_in_collection(self):
+        root = Node(6)
+        binary_search_insert(root, 5)
+        binary_search_insert(root, 0)
+
+        #self.assertEqual([6,5,0], each_(root))
+
+
+    def test_calls_a_func_with_map_to_each_item_in_collection(self):
         root = Node(6)
         binary_search_insert(root, 5)
         binary_search_insert(root, 8)
         binary_search_insert(root, 4)
         binary_search_insert(root, 9)
-        self.assertEqual([4, 3, 2, 6, 7], map_TOEACHITEM(root))
+        #self.assertEqual([4, 3, 2, 6, 7], map_TOEACHITEM(root))
 
     def test_calls_a_func_for_each_item_in_collection_and_returns_all_results(self):
         root = Node(6)
@@ -224,7 +246,7 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 8)
         binary_search_insert(root, 4)
         binary_search_insert(root, 9)
-        self.assertEqual([4,2, 6,], filterModOfNum(root))
+        #self.assertEqual([4,2, 6,], filterModOfNum(root))
 
     def test_accumulate_func_with_iterable_and_value(self):
         root = Node(6)
@@ -232,10 +254,10 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 8)
         binary_search_insert(root, 4)
         binary_search_insert(root, 9)
-        self.assertEqual(32, accumulate(root))
+        #self.assertEqual(32, accumulate(root))
 
-    def test_find_first_truthy_val(self):
-        self.assertEqual("Even Num", findfirst(4))
+    # def test_find_first_truthy_val(self):
+    #     self.assertEqual("Even Num", findfirst(4))
 
 
 
