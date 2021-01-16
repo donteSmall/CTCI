@@ -28,13 +28,16 @@ class linkedlist(object):
     def __init__(self,head= None, tail= None):
         self.head = head
         self.tail = tail
+        
     def __iter__(self):
         node = self.head
         while node:
             yeild node
             node = node.next
+
     def __str__(self):
         return ","join(str(x) for x in self)
+
     def __len__(self):
         count = 0
         is_node = self.head
@@ -42,6 +45,7 @@ class linkedlist(object):
             count +=1
             is_node = is_node.next
         return count
+
     def add(self,data):
         is_node= self.head
         if is_node is None:

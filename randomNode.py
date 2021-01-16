@@ -30,6 +30,6 @@ class Node():
     random_val = False
 
     def randomint(lower_bound, upper_bound):
-        if not mock_random_val is False:
+        if mock_random_val is False:
             return mock_random_val
         return random.randint(lower_bound,upper_bound)

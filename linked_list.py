@@ -9,14 +9,14 @@ class Node(object):
     def get_Data(self):
         return self.data
 
-    def get_next(self):
+    def getNext(self):
         return self.next
 
     def set_PointerTonext(self, new_next):
         self.next = new_next
 
     def has_Next(self):
-        if self.get_next() is None:
+        if self.getNext() is None: 
             return False
         return True
 
@@ -38,7 +38,7 @@ class linkedList(object):
 
 
         if head is not None:
-            self.add_multiple(head)
+            self.addMultiple(head)
 
     def __iter__(self):
         current = self.head
@@ -67,7 +67,7 @@ class linkedList(object):
 
         return self.tail
 
-    def add_multiple(self, data):
+    def addMultiple(self, data):
 
         for value in data:
             self.add(value)
@@ -105,7 +105,7 @@ class linkedList(object):
             if current_item_in_list.get_Data() == data:
                 return current_item_in_list
             else:
-                current_item_in_list = current_item_in_list.get_Next()
+                current_item_in_list = current_item_in_list.getNext()
         if current_item_in_list is None:
             raise ValueError("Data not in list")
         return current_item_in_list
@@ -121,17 +121,17 @@ class linkedList(object):
                 found = True
             else:
                 previous = current_item_in_list
-                current_item_in_list = current_item_in_list.get_Next()
+                current_item_in_list = current_item_in_list.getNext()
 
         if current_item_in_list is None:
             raise ValueError("Data not in list")
 
         if previous is None:
-            self.head = current_item_in_list.get_Next()
+            self.head = current_item_in_list.getNext()
         else:
-            previous.set_PointerTonext(current_item_in_list.get_Next())
+            previous.set_PointerTonext(current_item_in_list.getNext())
 
-
+#No sure why this is blowing up
     def delete_Middle(node):
         next = node.next
         node.data = node.data
@@ -165,10 +165,6 @@ class linkedList(object):
                     node = node.next
         return head
 
-    def delete_Middle(self,node):
-        next = node.next
-        node.data = node.data
-        node.next = next.next
 
     def kth_To_last(self,head, k):
         lead,follow = head, head

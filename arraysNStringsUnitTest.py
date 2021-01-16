@@ -2,6 +2,7 @@ import unittest
 from arraysNStrings import ArrayNString
 
 class arrays_and_strings_tests(unittest.TestCase):
+    
     def setUp(self):
         self.arraysNStrings  = ArrayNString()
 
