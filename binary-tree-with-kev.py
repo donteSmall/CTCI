@@ -19,6 +19,7 @@ class Node(object):
 def binary_search_insert(root, new_value):
     if root is None:
         raise TypeError()
+
     if new_value < root.value:
         if root.left:
             binary_search_insert(root.left, new_value)
@@ -38,7 +39,7 @@ class BinaryTreeTest(unittest.TestCase):
 
     def test_node_unable_to_be_created_without_value(self):
         with self.assertRaises(TypeError):
-            Node()
+           
 
     def test_node_has_left_and_right_as_None_when_created(self):
         node = Node(5)

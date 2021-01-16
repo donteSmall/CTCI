@@ -1,5 +1,5 @@
 import unittest
-from LinkedList_V2_02 import Node,linkedList
+from linked_list import Node,linkedList
 
 class linked_List_Tests(unittest.TestCase):
     def setUp(self):
@@ -68,7 +68,7 @@ class linked_List_Tests(unittest.TestCase):
         self.assertEqual(head.next.next.next,None)
 
     def test_Delete_middle(self):
-        head = Node(1,Node(2,Node(3,Node(4))))
+        head = Node(1,Node(2,Node(3,Node(4)))
 
         self.list.delete_Middle(head.next.next)
 

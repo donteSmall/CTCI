@@ -9,7 +9,7 @@ class Node(object):
     def get_Data(self):
         return self.data
 
-    def get_Next(self):
+    def get_next(self):
         return self.next
 
     def set_PointerTonext(self, new_next):
@@ -67,7 +67,7 @@ class linkedList(object):
 
         return self.tail
 
-    def add_Multiple(self, data):
+    def add_multiple(self, data):
 
         for value in data:
             self.add(value)
@@ -153,7 +153,7 @@ class linkedList(object):
                 current_item_in_list = current_item_in_list.get_next()
 
     def remove_Duplicates_2(self,head):
-        node= head
+        node = head
 
         if node:
             values = {node.data: True}

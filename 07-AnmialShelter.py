@@ -60,7 +60,7 @@ class Test(unittest.TestCase):
         self.assertEqual(str(self.shelter.dequeueAny()),"Blue")
         self.assertEqual(str(self.shelter.dequeueAny()),"Dish")
 
-     def test_DequeueCat(self):
+     def test_enqueueCat(self):
         self.shelter.enqueue(Dog("Blue"))
         self.shelter.enqueue(Dog("Fish"))
         self.shelter.enqueue(Dog("Red"))

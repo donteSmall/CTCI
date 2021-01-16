@@ -14,7 +14,7 @@ def climbstairs(num_of_staircase):
 
             return can[num_of_staircase]
         else:
-            print("Num of staircase input --> "+str(num_of_staircase))
+            print("Num of staircase input --> "+ str(num_of_staircase))
             can[num_of_staircase]= helper(num_of_staircase - 1) + helper(num_of_staircase - 2)
             return can[num_of_staircase]
 

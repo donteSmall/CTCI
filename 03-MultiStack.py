@@ -16,9 +16,11 @@ class MultiStack(object):
     def Pop(self, stacknum):
         if self.IsEmpty(stacknum):
             raise Exception('Stack is empty')
+
         value = self.array[self.IndexOfTop(stacknum)]
         self.array[self.IndexOfTop(stacknum)] = 0
         self.sizes[stacknum] -= 1
+        
         return value
 
     def Peek(self, stacknum):

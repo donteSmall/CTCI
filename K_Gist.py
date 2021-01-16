@@ -10,6 +10,24 @@ class Node(object):
         self.left = None
         self.right = None
 
+    def __getItem__(self):
+        return self.value
+
+    def __iter__(self):
+        yield self
+        
+        if self.left:
+            yield from self.left
+
+        if self.right:
+            yield from self.right
+
+    def __repr__(self):
+        if self.left is None and self.right is None:
+            s = '{}'.format(self.value)
+        else:
+            s = '[value:{}, left:{}, right:{}]'.format(self.value, self.left, self.right)
+        return s
 
 
 def binary_search_insert(root, new_value):
@@ -95,8 +113,11 @@ Write an ‘each’ which calls a passed function with each item in a collection
 '''
 
 def each_(f, collection):
+    results = []
     for item in collection:
-        f(item)
+        results.append(f(item.__getItem__()))
+    return results
+
 
 #each_(lambda x: print(x), [1,2,3])
 
@@ -105,12 +126,13 @@ A ‘map’ function, which calls a function for each item in a
 collection and returns all of the results in a list.
 '''
 
-def mapp(f, collection):
-    result = []
-    for item in collection:
-        result.append(f(item ))
-    return result
+def map(items, f):
+    results = []
 
+    for item in items:
+        results.append(f(item.__getItem__()))
+    return results
+#print(mapp(lambda x : x , [3]))
 '''
 A ‘filter’ function, which calls a function for each item in a collection
 and returns all of the items where the function returns a truthy value.
@@ -132,18 +154,41 @@ def accumulatee(iterr, f, val):
         val = f(val,item)
     return val
 
-def accumulatee_map(iterr, f, val):
-    resultMapp= []
-    resultfilter = []
-    for item in iterr:
-        val = f(val,item)
-        resultMapp.append(f(item,val))
-        return val,resultMapp
-    if f(item,val):
-        resultfilter.append(item)
-    s = '[value:{}, map:{}, filter:{}]'.format(val, resultMapp, resultfilter)
-    return s
-print(accumulatee_map([1,2,3], lambda x,y: x+y, 0))
+def map_in_terms_of_accumulate(elements,f):
+    for e in elements:
+        return accumulatee(elements,f,e)
+
+def sum(items):
+    total = 0
+    for i in items:
+        total = total + i # +(total, i)
+    return total
+
+def product(items):
+    total = 1
+    for i in items:
+        total = total * i # *(total, i)
+    return total
+
+
+
+
+def product_in_terms_of_accumulate(items):
+    return acc(items, lambda total, item: total * item, 1)
+
+def sum_in_terms_of_accumulate(items):
+    return acc(items, lambda total, item: total + item, 0)
+
+
+def map_in_terms_of_accumulate(items, f):
+    return acc(items, lambda total, item: total + [f(item)], [])
+
+
+def acc(items, f, accumulation):
+    for i in items:
+        accumulation = f(accumulation, i)
+    return accumulation
+
 '''
 Implement find_first, a function that takes an iterable and a function to apply and
 runs the first item where the function returns truthy
@@ -159,6 +204,13 @@ def findfirst(iterr,f):
 #print(findfirst([1,2,3,4], lambda x: x % 2 == 0))
 
 
+def route_between_nodes(graph, start, end, path):
+    path = path + [start]
+
+    if graph is None:
+        return None
+
+    
 
 
 # Change which function we're using for tests here
@@ -229,7 +281,7 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 5)
         binary_search_insert(root, 0)
 
-        #self.assertEqual([6,5,0], each_(root))
+        self.assertEqual([6,5,0], each_(lambda x: x,root))
 
 
     def test_calls_a_func_with_map_to_each_item_in_collection(self):
@@ -238,15 +290,9 @@ class BinaryTreeTest(unittest.TestCase):
         binary_search_insert(root, 8)
         binary_search_insert(root, 4)
         binary_search_insert(root, 9)
-        #self.assertEqual([4, 3, 2, 6, 7], map_TOEACHITEM(root))
 
-    def test_calls_a_func_for_each_item_in_collection_and_returns_all_results(self):
-        root = Node(6)
-        binary_search_insert(root, 5)
-        binary_search_insert(root, 8)
-        binary_search_insert(root, 4)
-        binary_search_insert(root, 9)
-        #self.assertEqual([4,2, 6,], filterModOfNum(root))
+        self.assertEqual([4, 3, 2, 6, 7], map(root, lambda x: x - 2))
+
 
     def test_accumulate_func_with_iterable_and_value(self):
         root = Node(6)
