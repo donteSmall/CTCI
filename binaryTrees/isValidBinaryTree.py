@@ -20,7 +20,17 @@ def helper(root,minVal,maxVal):
     validLeft = helper(root.left, minVal, root.value)
     validRight = helper(root.right, root.value, maxVal)
     return validLeft and validRight
+'''
+ min -∞
+ max  ∞                   2
+                       /     \
+ Left Traveral   -∞ > 1 < 2    7
+ Computation         /        /  \
+               -∞ > 0 < 1     1   8
 
+Note how min val based on root then the nxt root  down
+    
+'''
 class Test(unittest.TestCase):
     def test_isBalancedTreeTrue(self):
         tree = Node(2)
@@ -37,11 +47,6 @@ class Test(unittest.TestCase):
         self.assertFalse(isValidBSTSubtree(tree))
         
 
-
-#Time O(n)
-# Space O(1)
-# WORST CASE: O(n)
-#Best Case: ()
   
 if __name__ == "__main__":
     unittest.main()
