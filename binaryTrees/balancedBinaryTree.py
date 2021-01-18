@@ -8,7 +8,7 @@ class Node(object):
         self.right = None
 '''
 Determine if binary tree is height-balanced:
-* A binary tree is which the left and right subtree 
+* The left and right subtree 
   of every node differ in height by no more than 1
 
         Ex: Balanced          3                           Ex:unbalanced        1
@@ -65,22 +65,9 @@ class Test(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-# tree = Node(1)
-# tree.left = Node(2)
-# tree.left.left = Node(2)
-# tree.right = Node(3)
-# tree.right.left = Node(4)
-# tree.right.right = Node(5)
-
-# tree = Node(1)
-# tree.left = Node(2)
-# tree.left.right = Node(3)
-# tree.left.left = Node(3)
-# tree.left.left.right = Node(4)
-# tree.left.left.left = Node(4)
          
 # print(tree.right.value)
-print(isBalancedSubtree(tree))
+# print(isBalancedSubtree(tree))
 
             
 if __name__ == "__main__":

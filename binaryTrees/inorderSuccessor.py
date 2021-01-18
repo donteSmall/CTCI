@@ -18,6 +18,7 @@ Note: If the given node has no in-order successor in the tree, returnnull.
  DURING THE TRAVERSAL
     IF NODE GOES TO LEFT Side of Tree:
         Store the node as Successor before doing so
+Code: T: O(h) -> O(logn)
 '''
 def inOrderSuccessor(root,hasASuccessor):
     successor = None
