@@ -55,8 +55,6 @@ class Test(unittest.TestCase):
         tree2.right = Node(2)
         self.assertFalse(isSubtree(tree, tree2))
     
-
-    
     
   
 if __name__ == "__main__":
